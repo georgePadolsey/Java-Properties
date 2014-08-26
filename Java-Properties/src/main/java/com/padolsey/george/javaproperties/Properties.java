@@ -24,7 +24,7 @@ public class Properties {
 
 	@Setter
 	// The default language to use
-	private static String defaultLanguage = Utils.pluginValues.getDefaultLanguage();
+	private static String defaultLanguage = PropertyUtils.values.getDefaultLanguage();
 
 	// A Map with a language to property file conversion
 	private static final Map<String, java.util.Properties> properties = new HashMap<String, java.util.Properties>();
@@ -42,16 +42,16 @@ public class Properties {
 	}
 
 	/**
-	 * A Method that loads every language from the method {@link com.padolsey.george.javaproperties.UtilValues#getAvailableLanguages()}
+	 * A Method that loads every language from the method {@link PropertyUtilsValues#getAvailableLanguages()}
 	 */
 	private static void loadEachLanguage() {
 		String filename;
-		for(String language : Utils.pluginValues.getAvailableLanguages()) {
+		for(String language : PropertyUtils.values.getAvailableLanguages()) {
 			java.util.Properties tempProperty = new java.util.Properties();
 
 			try {
 
-				filename = Utils.lang2PropertyFileName(language);
+				filename = PropertyUtils.lang2PropertyFileName(language);
 
 				// Value initialized inside for loop to make the cleanup function run correctly
 				@Cleanup InputStream input = Properties.class.getClassLoader().getResourceAsStream(filename);
@@ -61,7 +61,7 @@ public class Properties {
 					// Print exception to console (no throwing today!) *as I need all this code to run*
 					new PropertiesException(
 							// Yes Magic value, I admit it. Though it is needed as language file hasn't been loaded!
-							"[!] Sorry, unable to find " + filename + " in this application; "+Utils.pluginValues.getErrorMessage()+" [!]"
+							"[!] Sorry, unable to find " + filename + " in this application; "+ PropertyUtils.values.getErrorMessage()+" [!]"
 					).printStackTrace();
 					return;
 

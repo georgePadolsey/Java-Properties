@@ -1,7 +1,7 @@
 package com.padolsey.george.example_properties;
 
 import com.padolsey.george.javaproperties.Properties;
-import com.padolsey.george.javaproperties.Utils;
+import com.padolsey.george.javaproperties.PropertyUtils;
 import lombok.extern.java.Log;
 
 /**
@@ -11,8 +11,11 @@ import lombok.extern.java.Log;
 public class Main {
 
     public static void main(String[] args) {
-        new Utils(new MyUtilValues());
+        PropertyUtils.setValues(new MyPropertyUtilsValues());
 
-        log.info(Properties.getProperty("hello")); // hi
+        log.info(Properties.getProperty("hello", "en")); // hi
+        log.info(Properties.getProperty("hello", "fr")); // bonjour
+
+        log.info(Properties.getProperty("hello")); // hi (as default language)
     }
 }
